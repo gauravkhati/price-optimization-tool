@@ -1,0 +1,23 @@
+.navbar-container{
+    display:flex;
+    justify-content:space-between;
+    background-color: rgb(55, 53, 53);
+    color:rgb(235, 229, 229);
+    align-items: center;
+}
+.title{
+    font-size: 2rem;
+    margin-left:2rem;
+    font-style: normal;
+}
+.profileName{
+    font-size: 2rem;
+    margin-right: 2rem;
+    color:rgb(140, 144, 125)
+}
+.account{
+    color:rgb(233, 215, 215)
+}
+p{
+    display: inline;
+}

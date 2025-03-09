@@ -1,0 +1,74 @@
+.authContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, black, #1f1818);
+  }
+  
+  .authForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: rgba(167, 163, 163, 0.182);
+    padding: 2rem;
+    border-radius: 0.8rem;
+    box-shadow: 0rem 0.4rem 1rem rgba(255, 255, 255, 0.1);
+    width: 28rem;
+    text-align: center;
+    color:white;
+  }
+  
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+  }
+  
+  input {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  input:focus {
+    border-color: #0f766e;
+  }
+  
+  button {
+    background-color: #0f766e;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #0d9488;
+  }
+  
+  .toggleText {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .toggleText span {
+    color: #0f766e;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .toggleText span:hover {
+    text-decoration: underline;
+  }
+  .errorText{
+    color: red;
+    font-size: 0.9rem;
+  }
+  

@@ -1,0 +1,11 @@
+:root {
+  font-size: 10px; /* Now 1rem = 10px */
+  /* box-sizing: border-box; */
+  margin:0
+}
+body{
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  margin:0;
+  padding:0;
+}

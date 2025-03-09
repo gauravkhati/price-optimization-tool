@@ -1,0 +1,53 @@
+from pydantic import BaseModel, Field
+from typing import List, Optional
+from datetime import datetime
+from fastapi import Query
+from fastapi import Header
+
+class ProductBase(BaseModel):
+    name: str
+    category: str
+    cost_price: float
+    selling_price: float
+    description: Optional[str] = None
+    available_stock: float
+    units_sold: Optional[int] = 0
+
+class ProductCreate(ProductBase):
+    pass
+
+class FilterProduct(BaseModel):
+    name:Optional[str] = Query(None)
+    category:Optional[str] =Query(None)
+    sort_by:Optional[str] = Query("created_at")
+    order:Optional[str] = Query("desc")
+    limit:Optional[int] = Query(10)
+    skip:Optional[int] = Query(0)
+
+
+
+class ProductUpdate(BaseModel):
+    name: Optional[str] = None
+    category: Optional[str] = None
+    cost_price: Optional[float] = None
+    selling_price: Optional[float] = None
+    description: Optional[str] = None
+    stock: Optional[int] = None
+    units_sold: Optional[int] = None
+
+class ProductResponse(ProductBase):
+    id: str
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class FilterProductResponse(BaseModel):
+    total: int
+    limit: int
+    skip: int
+    products: List[ProductResponse]
+
+class BulkProductCreate(BaseModel):
+    data: List[ProductCreate]   
