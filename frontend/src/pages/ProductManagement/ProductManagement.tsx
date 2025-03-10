@@ -3,15 +3,15 @@ import ControlPanel from "../../components/ControlPanel/ControlPanel";
 import { useEffect, useState } from "react";
 import useGetTableData, { Product } from "../../hooks/useGetTableData";
 import { DataGrid, GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
-
-
+import { sampleData } from "../../components/constant";
+import styles from './ProductManagement.module.css';
 
 interface ProductManagementProps {
   dashboard: string;
 }
 
-const ProductManagement:React.FC<ProductManagementProps> = (props) => {
-  const {dashboard} = props;
+const ProductManagement: React.FC<ProductManagementProps> = (props) => {
+  const { dashboard } = props;
   const { fetchData, error, loading, tableData } = useGetTableData();
   const [selectedRows, setSelectedRows] = useState<Product[]>([]);
   const columnsForProductManagement: GridColDef[] = [
@@ -25,11 +25,11 @@ const ProductManagement:React.FC<ProductManagementProps> = (props) => {
   ];
   const columnsForCostOptimization: GridColDef[] = [
     { field: "name", headerName: "Product Name", flex: 1 },
-    {field:'category',headerName:'Category',flex:1},
-    {field:'description',headerName:'Description',flex:2},
+    { field: 'category', headerName: 'Category', flex: 1 },
+    { field: 'description', headerName: 'Description', flex: 2 },
     { field: "cost_price", headerName: "Cost Price", type: "number", flex: 1 },
     { field: "selling_price", headerName: "Selling Price", type: "number", flex: 1 },
-    { field: "optimized_price", headerName: "Optimized Price", type: "number", flex: 1,cellClassName:"highlight-column" }
+    { field: "optimized_price", headerName: "Optimized Price", type: "number", flex: 1, cellClassName: "highlight-column" }
   ]
   useEffect(() => {
     console.log("Fetching Data");
@@ -38,9 +38,9 @@ const ProductManagement:React.FC<ProductManagementProps> = (props) => {
   }, []);
 
 
-  
 
-  const columnData = (dashboard==='product-management'?columnsForProductManagement:columnsForCostOptimization).filter((column: GridColDef) => tableData?.products[0][column.field as keyof Product]);
+
+  const columnData = (dashboard === 'product-management' ? columnsForProductManagement : columnsForCostOptimization).filter((column: GridColDef) => tableData?.products[0][column.field as keyof Product]);
 
   const handlePaginationChange = (model: { page: number; pageSize: number }) => {
     fetchData({ skip: model.page * model.pageSize, limit: model.pageSize });
@@ -54,8 +54,10 @@ const ProductManagement:React.FC<ProductManagementProps> = (props) => {
     <div>
       <Navbar />
       <ControlPanel selectedRows={selectedRows} dashboard={dashboard} />
-      <div style={{ height: 700, width: "100%" }}>
+      <div className={styles['dataTableContainer']}>
         <DataGrid
+          showCellVerticalBorder={false}
+          showColumnVerticalBorder={false}
           rows={tableData?.products}
           columns={columnData}
           checkboxSelection
@@ -68,29 +70,31 @@ const ProductManagement:React.FC<ProductManagementProps> = (props) => {
           onPaginationModelChange={handlePaginationChange}
           getRowId={(row) => row.id}
           sx={{
-            backgroundColor: "#000", 
-            color: "#FFF", 
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "#1A1A1A",
-              color: "black",
+            "& .MuiDataGrid-columnHeader": {
+              backgroundColor: "#000",
+              color: "white",
               fontWeight: "bold",
+              fontSize: '1.125rem'
+            },
+            "& .MuiDataGrid-cell": {
+              backgroundColor: 'white',
+              color: 'black',
+              borderBottom: "1px solid #444",
+            },
+            "& .MuiDataGrid-columnHeaderCheckbox": {
+              color: 'black',
+              backgroundColor: "white"
             },
             "& .MuiDataGrid-footerContainer": {
-              backgroundColor: "#1A1A1A",
-              color: "#FFF",
-            },
-            "& .MuiSvgIcon-root": {
-              color: "#FFF", 
-            },
-            "& .MuiTablePagination-root": {
-              color: "#FFF",
+              backgroundColor: 'white',
+              color: "black",
             },
             "& .highlight-column": {
-              color: "#0fdfb7 !important", 
+              color: "#0fdfb7 !important",
               fontWeight: "bold",
             },
             "& .highlight-column-width": {
-              color: "black !important", 
+              color: "black !important",
               fontWeight: "bold",
               backgroundColor: '#0fdfb7'
             },
