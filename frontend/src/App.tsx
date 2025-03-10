@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import { ErrorPage, HomePage, LoginPage, PricingOptimizationPage, ProductManagementPage } from "./pages";
+import { ErrorPage, HomePage, LoginPage, ProductManagementPage } from "./pages";
 import { useEffect } from "react";
 import { isTokenValid } from "./utils";
 
@@ -7,12 +7,12 @@ function App() {
   return (
     <>
       <Router>
-        {/* <AuthChecker /> */}
+        <AuthChecker />
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/products" element={<ProductManagementPage />} />
-          <Route path="/pricing" element={<PricingOptimizationPage />} />
+          <Route path="/products" element={<ProductManagementPage dashboard={'product-management'}/>} />
+          <Route path="/pricing" element={<ProductManagementPage dashboard={'cost-optimization'} />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>

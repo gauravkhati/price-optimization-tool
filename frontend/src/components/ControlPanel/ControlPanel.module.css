@@ -72,9 +72,9 @@
   
   /* Disabled button style */
   .disabled-button {
-    background-color: #cccccc !important; /* Light gray */
+    background-color:  #0fdfb7 !important; 
     color: #666666 !important; /* Dark gray */
     cursor: not-allowed !important;
-    opacity: 0.6;
+    opacity: 0.5;
   }
   

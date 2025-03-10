@@ -2,8 +2,8 @@ import { Dialog } from "@mui/material"
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { sampleData } from "../constant";
 import style from "./ForecastDemand.module.css";
-import { Product } from "../../pages/useGetTableData";
 import DemandForecastChart from "../DemandForecastChart/DemandForecastChart";
+import { Product } from "../../hooks/useGetTableData";
 interface ForecastDemandProps {
   open: boolean;
   onClose: () => void;
@@ -15,7 +15,7 @@ const columnData: GridColDef[] = [
   { field: "selling_price", headerName: "Selling Price", type: "number", flex: 1 },
   { field: "available_stock", headerName: "Stock", type: "number", flex: 1 },
   { field: "units_sold", headerName: "Units Sold", type: "number", flex: 1 },
-  { field: "demand_forecast", headerName: "Calculated Demand Forecast", type: "number", flex: 1 },
+  { field: "demand_forecast", headerName: "Calculated Demand Forecast", type: "number", flex: 1, cellClassName: "highlight-column-width" },
 ];
 const ForecastDemand: React.FC<ForecastDemandProps> = ({ open, onClose, selectedData }) => {
   return (
@@ -40,32 +40,31 @@ const ForecastDemand: React.FC<ForecastDemandProps> = ({ open, onClose, selected
               pageSizeOptions={[10, 20, 50]}
               getRowId={(row) => row.id}
               sx={{
-                backgroundColor: "#000", // Black background
-                color: "#FFF", // White text
+                backgroundColor: "#000", 
+                color: "#FFF", 
                 "& .MuiDataGrid-columnHeaders": {
-                  backgroundColor: "#1A1A1A", // Dark header
+                  backgroundColor: "#1A1A1A",
                   color: "black",
                   fontWeight: "bold",
                 },
-                "& .MuiDataGrid-cell": {
-                  color: "#FFF",
-                  borderBottom: "1px solid #444", // Light gray border
-                },
-                "& .MuiCheckbox-root": {
-                  color: "#0fdfb7 !important", // Checkbox color
-                },
                 "& .MuiDataGrid-footerContainer": {
-                  backgroundColor: "#1A1A1A", // Footer background
+                  backgroundColor: "#1A1A1A",
                   color: "#FFF",
-                },
-                "& .MuiButton-root": {
-                  color: "#0fdfb7", // Custom button color
                 },
                 "& .MuiSvgIcon-root": {
-                  color: "#FFF", // Icons color
+                  color: "#FFF", 
                 },
                 "& .MuiTablePagination-root": {
                   color: "#FFF",
+                },
+                "& .highlight-column": {
+                  color: "#0fdfb7 !important", 
+                  fontWeight: "bold",
+                },
+                "& .highlight-column-width": {
+                  color: "black !important", 
+                  fontWeight: "bold",
+                  backgroundColor: '#0fdfb7'
                 },
               }}
             />

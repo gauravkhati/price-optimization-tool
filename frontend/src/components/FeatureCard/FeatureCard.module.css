@@ -8,7 +8,7 @@
   height: 38rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   text-align: start;
   transition: transform 0.3s ease-in-out;
 }
@@ -46,4 +46,11 @@
 
 .arrow-icon {
   color: black;
+}
+
+.cardImage{
+  width:8rem;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
 }

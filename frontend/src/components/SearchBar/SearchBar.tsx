@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import { TextField, Select, MenuItem, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { TableRow } from "../Table/PriceDetailTable";
+import { Product } from "../../hooks/useGetTableData";
 interface SearchBarProps {
-    data: {
-        rowData: TableRow[];
-    }
+    data:  Product[];
 }
 const SearchBar: React.FC<SearchBarProps> = (props) => {
     const { data } = props;
-    const attributes = Object.keys(data.rowData[0]).filter((key) => key !== 'id');
+    const attributes = data;
     const [search, setSearch] = useState("");
     const [sortBy, setSortBy] = useState("name");
     const [order, setOrder] = useState("asc");
@@ -89,11 +87,6 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
                 }}
             >
                 <MenuItem value="" disabled>Select an Attribute</MenuItem>
-                {attributes.map((attr) => (
-                    <MenuItem key={attr} value={attr}>
-                        {attr.charAt(0).toUpperCase() + attr.slice(1)} {/* Capitalize first letter */}
-                    </MenuItem>
-                ))}
             </Select>
 
 

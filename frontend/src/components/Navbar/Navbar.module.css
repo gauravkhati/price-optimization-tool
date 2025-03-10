@@ -1,14 +1,15 @@
 .navbar-container{
     display:flex;
     justify-content:space-between;
-    background-color: rgb(55, 53, 53);
-    color:rgb(235, 229, 229);
+    background-color: #222323;
+    color:#0fdfb7;
     align-items: center;
+    font-weight: lighter;
 }
 .title{
     font-size: 2rem;
     margin-left:2rem;
-    font-style: normal;
+
 }
 .profileName{
     font-size: 2rem;
@@ -16,7 +17,7 @@
     color:rgb(140, 144, 125)
 }
 .account{
-    color:rgb(233, 215, 215)
+    color:#0fdfb7
 }
 p{
     display: inline;
