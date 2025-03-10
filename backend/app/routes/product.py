@@ -1,20 +1,19 @@
 from app.services.product import create_product, delete_product, get_filtered_products, get_product_by_id, get_products, update_product
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
-from ..schemas.product import FilterProduct, FilterProductResponse, ProductCreate, ProductUpdate, ProductResponse,BulkProductCreate
+from ..schemas.product import FilterProduct, FilterProductResponse, ProductCreate, ProductUpdate, ProductResponse,BulkProductCreate,CreateProductResponse
 from ..database import get_db
 from ..models.product import Product
 from typing import List, Optional
 
 router = APIRouter()
 
-@router.post("/", response_model=ProductResponse)
+@router.post("/", response_model=CreateProductResponse)
 def create(product: ProductCreate, db: Session = Depends(get_db)):
     return create_product(db, product)
 
 @router.post("/bulkAdd",response_model=List[ProductResponse])
 def bulk_add_products(products:BulkProductCreate, db: Session = Depends(get_db)):
-    print('products',products)
     return [create_product(db, product) for product in products]
 
 

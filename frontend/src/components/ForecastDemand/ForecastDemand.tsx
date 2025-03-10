@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { sampleData } from "../constant";
 import style from "./ForecastDemand.module.css";
 import { Product } from "../../pages/useGetTableData";
+import DemandForecastChart from "../DemandForecastChart/DemandForecastChart";
 interface ForecastDemandProps {
     open: boolean;
     onClose: () => void;
@@ -19,15 +20,17 @@ const columnData: GridColDef[] = [
 const ForecastDemand:React.FC<ForecastDemandProps> = ({open,onClose,selectedData}) => {
   return(
     <>
-        <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" sx={{
+        <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg" sx={{
             "& .MuiPaper-root": {
-                backgroundColor: "#141515",
+                backgroundColor: "#222323",
                 color: "white"
             }
         }} >
             <div className={style["forecast-demand-container"]}>       
              <div className={style['graph-container']}>
-            Here graph will be rendered
+             
+          <DemandForecastChart data={{rowData:selectedData}}/>
+  
         </div>
             <div className={style['table-container']} >
         <DataGrid

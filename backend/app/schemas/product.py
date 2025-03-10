@@ -44,9 +44,24 @@ class ProductResponse(BaseModel):
     description: Optional[str] = None
     available_stock: float=None
     units_sold: Optional[int] = None
+    customer_rating: Optional[float] = None
+    demand_forecast: Optional[float] = None
+    optimized_price: Optional[float] = None
+
+class CreateProductResponse(BaseModel):
+    id: str=None
+    name: str=None
+    category: str=None
+    cost_price: float=None
+    selling_price: float=None
+    description: Optional[str] = None
+    available_stock: float=None
+    units_sold: Optional[int] = None
+    customer_rating: Optional[float] = None
 
     class Config:
         from_attributes = True
+        
 
 class FilterProductResponse(BaseModel):
     total: int
