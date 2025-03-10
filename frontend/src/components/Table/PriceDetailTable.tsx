@@ -1,6 +1,6 @@
 import styles from './Table.module.css';
 interface TableRow {
-    product_id: number;
+    id: number;
     name: string;
     description: string;
     cost_price: number;
@@ -21,7 +21,8 @@ interface TableProps {
   
   const PriceDetailTable: React.FC<TableProps> = ( props ) => {
     const { data  } = props ;
-    const columnHeader=Object.keys(data.rowData[0]);
+
+    const columnHeader=Object.keys(data.rowData[0]).filter((key)=>key!=='id');
     return (
       <div className={styles.tableContainer}>
         <table className={styles.table}>
@@ -43,8 +44,11 @@ interface TableProps {
             {data.rowData.map((row, index) => (
               <tr key={index}>
                 <td className={styles.label}>{`select`}</td>
-                <td className={styles.label}>{row.product_id}</td>
-                <td className={styles.normalProgram}>{row.name}</td>
+                {columnHeader.map((column,index)=>(
+                  <td key={index} className={styles.normalProgram}>{row[column as keyof TableRow]}</td>
+                ))
+                  }
+                {/* <td className={styles.normalProgram}>{row.name}</td>
                 <td className={styles.capValue}>{row.description}</td>
                 <td className={styles.normalProgram}>{row.cost_price}</td>
                 <td className={styles.normalProgram}>{row.selling_price}</td>
@@ -53,10 +57,10 @@ interface TableProps {
                 <td className={styles.normalProgram}>{row.units_sold}</td>
                 <td className={styles.normalProgram}>{row.customer_rating}</td>
                 <td className={styles.normalProgram}>{row.demand_forecast}</td>
-                <td className={styles.capValue}>{row.optimized_price}</td>
+                <td className={styles.capValue}>{row.optimized_price}</td> */}
               </tr>
             ))}
-            <tr>
+            {/* <tr>
               <td className={styles.footer} colSpan={columnHeader.length+1}>
                 <div className={styles.textContainer}>
                   <div className={styles.savingsLabel}>Average Savings</div>
@@ -64,7 +68,7 @@ interface TableProps {
                 </div>
                 <div className={styles.starText}>* all numbers represented are averages</div>
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
   

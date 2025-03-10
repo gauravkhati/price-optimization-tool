@@ -24,8 +24,10 @@ def filter_products(  name: Optional[str] = Query(None),
     sort_by: Optional[str] = Query("created_at"),
     order: Optional[str] = Query("desc"),
     limit: Optional[int] = Query(10),
+    select: Optional[List[str]] = Query(None),
     skip: Optional[int] = Query(0), db: Session = Depends(get_db)):
-    filters={'category':category,'name':name,'sort_by':sort_by,'order':order,'limit':limit,'skip':skip}
+
+    filters={'category':category,'name':name,'sort_by':sort_by,'order':order,'limit':limit,'skip':skip,'select':select}
 
     return get_filtered_products(db,filters)
 

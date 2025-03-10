@@ -23,27 +23,36 @@ def get_products(db: Session):
         joinedload(Product.price_optimization)
     ).all()
 
-def get_filtered_products(db: Session, filter: FilterProduct):  
+def get_filtered_products(db: Session, filters: FilterProduct):   
     query = db.query(Product)
-    if filter.get("name"):  
-        name=filter['name']
+    if filters.get("name"):  
+        name=filters['name']
         query = query.filter(Product.name.ilike(f"%{name}%"))
-    if filter.get("category"):
-        query = query.filter(Product.category == filter["category"])
+    if filters.get("category"):
+        query = query.filter(Product.category == filters["category"])
     
     # Sorting
-    if filter.get("sort_by") in ["cost_price", "selling_price", "units_sold", "name"]:
-        sort_func = asc if filter.get("order", "desc") == "asc" else desc
-        query = query.order_by(sort_func(getattr(Product, filter["sort_by"])))
+    if filters.get("sort_by") in ["cost_price", "selling_price", "units_sold", "name"]:
+        sort_func = asc if filters.get("order", "desc") == "asc" else desc
+        query = query.order_by(sort_func(getattr(Product, filters["sort_by"])))
 
     # Pagination
     total_count = query.count()
+    query = query.offset(filters.get("skip", 0)).limit(filters.get("limit", 10))
+    if filters.get('select'):
+        columns = [getattr(Product, col) for col in filters['select'] if hasattr(Product, col)]
+        print('columns',columns)
+        if columns:
+
+            query = query.with_entities(*columns)
     print('query',query)
-    products = query.offset(filter.get("skip", 0)).limit(filter.get("limit", 10)).all()
+    products=query.all()
+    print('products',products)
+
     return {
         "total": total_count,
-        "limit": filter.get("limit", 10),
-        "skip": filter.get("skip", 0),
+        "limit": filters.get("limit", 10),
+        "skip": filters.get("skip", 0),
         "products": list(products)
     }
 

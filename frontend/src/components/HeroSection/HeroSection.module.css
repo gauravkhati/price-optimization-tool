@@ -41,3 +41,23 @@
     transform: scale(1.05);
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .hero {
+        padding: 4rem 2rem;
+        height: fit-content;
+    }
+
+    .title {
+        font-size: 4rem;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .features {
+        flex-direction: column;
+        gap: 4rem;
+    }
+}

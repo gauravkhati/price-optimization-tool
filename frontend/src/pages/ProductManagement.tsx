@@ -1,41 +1,41 @@
 import Navbar from "../components/Navbar/Navbar";
 import PriceDetailTable from "../components/Table/PriceDetailTable";
-import { tableData } from "../components/Table/constants";
+// import { tableData } from "../components/Table/constants";
 import style from './Prod.module.css';
 import arrowBack from '../assets/icons/arrow_back.svg';
 import DemandForecastChart from "../components/DemandForecastChart/DemandForecastChart";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useGetTableData from "./useGetTableData";
+import AddProductPopup from "../components/AddProductPopup/AddProductPopup";
+import ControlPanel from "../components/ControlPanel/ControlPanel";
 
 
 const ProductManagement = () => {
-    return (
-        <div className="p-10">
-          <Navbar/>
-          <div className={style['searchBarContainer']}>
-            <div className={style['back-button']}>
-                <div className={style['back-icon']}>
-                    <img src={arrowBack} alt="back-icon"></img>
-                </div>
-                <h5>Back</h5>
-            </div>
-            <div className={style['vertical-line']}>
+  const { fetchData, error, loading, tableData } = useGetTableData();
 
-            </div>
-            <div className={style['heading-container']}>
-            <h1 className={style['dashboard-heading']}>Create and Manage Product</h1>
-            <div className={style['demand-forecast']}>
-                DemandForecast
-            </div>
-            </div>
-            <div className={style['vertical-line']}></div>
+  useEffect(() => {
+    console.log('Fetching Data');
+    fetchData({});
+  }, []);
+
+  return (
+    <div className="container">
+      <Navbar />
+      <ControlPanel/>
+      {!loading && tableData && tableData.products &&
+        <div className={style['table-container']}>
+          <PriceDetailTable data={{ rowData: tableData.products }} />
         </div>
-          <PriceDetailTable data={{rowData:tableData}}/>
-          <div className={style['demand-forecast-container']}>
+      }
+      {/* <div className={style['demand-forecast-container']}>
           <DemandForecastChart data={{rowData:tableData}}/>
-          </div>
-        </div>
-    
-      );
-  };
-  
-  export default ProductManagement;
-  
+          </div> */}
+      {error && <div>{error}</div>}
+     
+    </div>
+
+  );
+};
+
+export default ProductManagement;

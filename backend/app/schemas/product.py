@@ -35,10 +35,15 @@ class ProductUpdate(BaseModel):
     stock: Optional[int] = None
     units_sold: Optional[int] = None
 
-class ProductResponse(ProductBase):
-    id: str
-    created_at: datetime
-    updated_at: datetime
+class ProductResponse(BaseModel):
+    id: str=None
+    name: str=None
+    category: str=None
+    cost_price: float=None
+    selling_price: float=None
+    description: Optional[str] = None
+    available_stock: float=None
+    units_sold: Optional[int] = None
 
     class Config:
         from_attributes = True
