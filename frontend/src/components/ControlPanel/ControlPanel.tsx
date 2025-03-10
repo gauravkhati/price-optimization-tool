@@ -38,7 +38,7 @@ const ControlPanel: React.FC = () => {
         <button
           className={style['add-product-button']}
           onClick={() => setOpen(true)}
-          disabled={userRole === 'user'}
+          disabled={userRole !== ''}
         >
           Add Product
         </button>
