@@ -1,5 +1,5 @@
 import styles from './Table.module.css';
-interface TableRow {
+export interface TableRow {
     id: number;
     name: string;
     description: string;

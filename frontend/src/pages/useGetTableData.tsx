@@ -13,7 +13,8 @@ export interface ProductFilterParams {
 }
 
 
-type Product = {
+export type Product = {
+    id:string
     name: string;
     description: string;
     cost_price: number;
@@ -38,7 +39,7 @@ const useGetTableData = () => {
     const [error, setError] = useState<string | null>(null);
     const [tableData, setTableData] = useState<ProductResponse>();
     const [loading, setLoading] = useState<boolean>(true);
-    // have a api call return data
+    // have a api call return dataxx
     async function fetchData(filter: ProductFilterParams) {
         const queryParams = new URLSearchParams(
             Object.entries(filter).reduce((acc, [key, value]) => {

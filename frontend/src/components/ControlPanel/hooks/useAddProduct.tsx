@@ -1,20 +1,14 @@
 import { useState } from 'react'
+import { Product } from '../../../pages/useGetTableData';
 
-export interface Product{
-  name: string,
-  category: string,
-  cost_price: string,
-  selling_price: string,
-  description: string,
-  available_stock: string,
-  units_sold: string,
-};
+
 const useAddProduct = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [success,setSuccess]=useState<boolean>(false);
 
-  async function addProduct(product:Product) {
+  type AddProductType = Pick<Product, 'name' | 'category' | 'cost_price' | 'selling_price'|'description'|'available_stock'|'units_sold'> ;
+  async function addProduct(product:AddProductType) {
     try{
       setLoading(true);
       const token = localStorage.getItem("accessToken");

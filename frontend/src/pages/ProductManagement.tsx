@@ -22,7 +22,7 @@ const ProductManagement = () => {
   return (
     <div className="container">
       <Navbar />
-      <ControlPanel/>
+      <ControlPanel data={{ rowData: tableData.products }}/>
       {!loading && tableData && tableData.products &&
         <div className={style['table-container']}>
           <PriceDetailTable data={{ rowData: tableData.products }} />

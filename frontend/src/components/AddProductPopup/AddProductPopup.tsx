@@ -8,12 +8,15 @@ import {
     IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import React, { use, useEffect, useState } from 'react'
-import useAddProduct, { Product } from "../ControlPanel/hooks/useAddProduct";
+import React, { useEffect, useState } from 'react'
+import useAddProduct, { } from "../ControlPanel/hooks/useAddProduct";
+import { Product } from "../../pages/useGetTableData";
 interface AddProductPopupProps {
     open: boolean;
     onClose: () => void;
 }
+
+
 const AddProductPopup: React.FC<AddProductPopupProps> = ({ open, onClose }) => {
     const { addProduct, success } = useAddProduct();
     const handleAddProductSubmit = () => {
@@ -24,24 +27,26 @@ const AddProductPopup: React.FC<AddProductPopupProps> = ({ open, onClose }) => {
         }
 
     };
-    const [formData, setFormData] = useState<Product>({
+
+    const [formData, setFormData] = useState<Pick<Product, 'name' | 'category' | 'cost_price' | 'selling_price'|'description'|'available_stock'|'units_sold'>>({
         name: "",
         category: "",
-        cost_price: "",
-        selling_price: "",
+        cost_price: 0,
+        selling_price: 0,
         description: "",
-        available_stock: "",
-        units_sold: "",
+        available_stock: 0,
+        units_sold: 0,
     });
     useEffect(() => {
         setFormData({
             name: "",
             category: "",
-            cost_price: "",
-            selling_price: "",
+            cost_price: 0,
+            selling_price: 0,
             description: "",
-            available_stock: "",
-            units_sold: ""
+            available_stock: 0,
+            units_sold: 0,
+            
         })
     }, [])
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

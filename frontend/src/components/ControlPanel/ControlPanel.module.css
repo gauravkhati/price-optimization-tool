@@ -30,7 +30,6 @@
 .demand-forecast{
     font-size: 1.5rem;
     font-weight: lighter;
-
 }
 .vertical-line {
     border-left: 2px solid black; /* Adjust thickness & color */
@@ -52,3 +51,30 @@
     margin-left: 50rem;
 
 }
+.add-product-button {
+    background-color: #0fdfb7;
+    color: black;
+    cursor: pointer;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+    display: flex;
+    gap:1rem;
+  }
+  .add-product-button>img{
+    filter: invert(1);
+  }
+  
+  .add-product-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Disabled button style */
+  .disabled-button {
+    background-color: #cccccc !important; /* Light gray */
+    color: #666666 !important; /* Dark gray */
+    cursor: not-allowed !important;
+    opacity: 0.6;
+  }
+  

@@ -3,15 +3,37 @@ import AddProductPopup from "../AddProductPopup/AddProductPopup";
 import style from './ControlPanel.module.css';
 import { useNavigate } from "react-router-dom";
 import arrowBack from '../../assets/icons/arrow_back.svg';
-const ControlPanel: React.FC = () => {
+import SearchBar from "../SearchBar/SearchBar";
+import  {type TableRow} from "../Table/PriceDetailTable";
+import AddIcon from '../../assets/icons/add_circle.svg';
+import ForecastIcon from '../../assets/icons/forecast.svg';
+import ForecastDemand from "../ForecastDemand/ForecastDemand";
+import { Product } from "../../pages/useGetTableData";
+
+interface ControlPanelProps {
+  selectedRows: Product[];
+}
+const ControlPanel: React.FC<ControlPanelProps> = (props) => {
+  const {selectedRows} = props;
   const navigate = useNavigate();
   const navigateToHomePage = () => {
     navigate("/home");
   };
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [openForcastDemand, setOpenForcastDemand] = useState(false);
 
-  const token = localStorage.getItem('token'); // Adjust based on your token storage method
-  const userRole = token ? JSON.parse(atob(token.split('.')[1])).role : null;
+  const handleOpenForcastDemand=()=>{
+    if(selectedRows.length===0){
+      setError('Please select atleast one product');
+      return;
+    }
+    setOpenForcastDemand(true);
+  }
+
+  const token = localStorage.getItem('accessToken');
+  const userRole = token ? JSON.parse(atob(token.split('.')[1])).userRole : null;
+  console.log(userRole);
   return (
     <div className={style['searchBarContainer']}>
       <div className={style['back-button']} onClick={navigateToHomePage}>
@@ -29,21 +51,36 @@ const ControlPanel: React.FC = () => {
           DemandForecast
         </div>
       </div>
-      <div className={style['vertical-line']}></div>
+      <div className={style['vertical-line']}/>
+      <div className={style['search-bar-container']}>
+        {/* <SearchBar data={data}/> */}
+      </div>
+      <div className={style['vertical-line']}/>
+      
       <div className={style['add-product']}>
-        <button className={style['add-product-button']} onClick={() => setOpen(true)}>Add Product</button>
+        
+        <button className={style['add-product-button']} onClick={() => setOpen(true)}>
+        <img src={AddIcon}  alt="forecast-icon" />
+        <p>Add Product</p>
+        </button>
       </div>
       <div className={style['forecast-demand']}>
-        //only accessible to admin
+        {/* only accessible to admin */}
         <button
-          className={style['add-product-button']}
-          onClick={() => setOpen(true)}
-          disabled={userRole !== ''}
+          className={`${style['add-product-button']} ${userRole !== 'admin' ? style['disabled-button'] : ''}`}
+          onClick={() => handleOpenForcastDemand()}
+          disabled={userRole !== 'admin'}
         >
-          Add Product
+          <img src={ForecastIcon} alt="forecast-icon" />
+          <p>Forecast Demand</p>
         </button>
       </div>
       <AddProductPopup open={open} onClose={() => setOpen(false)} />
+      {
+        selectedRows && selectedRows.length>0&&
+      <ForecastDemand open={openForcastDemand} onClose={() => setOpenForcastDemand(false)} selectedData={selectedRows} /> 
+      }
+       {error && <div>{error}</div>}
     </div>
 
 
