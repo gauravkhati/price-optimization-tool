@@ -76,18 +76,36 @@ const ProductManagement: React.FC<ProductManagementProps> = (props) => {
               fontWeight: "bold",
               fontSize: '1.125rem'
             },
+    
+            "& .MuiDataGrid-footerContainer": {
+              backgroundColor: "black",
+              color: "white !important",
+            },
+            "& .MuiTablePagination-root, & .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows": {
+              color: "white !important",
+            },
+            "& .MuiSvgIcon-root": {
+              color: "white !important", // For pagination icons
+            },
             "& .MuiDataGrid-cell": {
-              backgroundColor: 'white',
-              color: 'black',
-              borderBottom: "1px solid #444",
+              color: "black",
+              borderBottom: "1px solid #440", // Light gray border
+            },
+            "& .MuiDataGrid-row:nth-of-type(odd)": {
+              backgroundColor: "white", 
+              color: "black"
+            },
+            "& .MuiDataGrid-row:nth-of-type(even)": {
+              backgroundColor: "#c9c3c3",
+              color: "black"
             },
             "& .MuiDataGrid-columnHeaderCheckbox": {
-              color: 'black',
-              backgroundColor: "white"
+              color: '#440 !important',
+              backgroundColor: "black"
             },
-            "& .MuiDataGrid-footerContainer": {
-              backgroundColor: 'white',
-              color: "black",
+            "& .MuiCheckbox-root .MuiSvgIcon-root": {
+              border: "1px solid #c9c3c3 !important", 
+              borderRadius: "4px", 
             },
             "& .highlight-column": {
               color: "#0fdfb7 !important",
@@ -97,6 +115,9 @@ const ProductManagement: React.FC<ProductManagementProps> = (props) => {
               color: "black !important",
               fontWeight: "bold",
               backgroundColor: '#0fdfb7'
+            },
+            "& .MuiDataGrid-row:hover": {
+              backgroundColor: "red", // Prevent hover effect
             },
           }}
         />

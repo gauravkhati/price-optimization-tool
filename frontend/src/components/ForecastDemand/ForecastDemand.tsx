@@ -40,31 +40,52 @@ const ForecastDemand: React.FC<ForecastDemandProps> = ({ open, onClose, selected
               pageSizeOptions={[10, 20, 50]}
               getRowId={(row) => row.id}
               sx={{
-                backgroundColor: "#000", 
-                color: "#FFF", 
-                "& .MuiDataGrid-columnHeaders": {
-                  backgroundColor: "#1A1A1A",
-                  color: "black",
+                "& .MuiDataGrid-columnHeader": {
+                  backgroundColor: "#000",
+                  color: "white",
                   fontWeight: "bold",
+                  fontSize: '1.125rem'
                 },
+        
                 "& .MuiDataGrid-footerContainer": {
-                  backgroundColor: "#1A1A1A",
-                  color: "#FFF",
+                  backgroundColor: "black",
+                  color: "white !important",
+                },
+                "& .MuiTablePagination-root, & .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows": {
+                  color: "white !important",
                 },
                 "& .MuiSvgIcon-root": {
-                  color: "#FFF", 
+                  color: "white !important", // For pagination icons
                 },
-                "& .MuiTablePagination-root": {
-                  color: "#FFF",
+                "& .MuiDataGrid-cell": {
+                  color: "black",
+                  borderBottom: "1px solid #440", // Light gray border
+                },
+                "& .MuiDataGrid-row:nth-of-type(odd)": {
+                  backgroundColor: "white", 
+                },
+                "& .MuiDataGrid-row:nth-of-type(even)": {
+                  backgroundColor: "#c9c3c3",
+                },
+                "& .MuiDataGrid-columnHeaderCheckbox": {
+                  color: '#440 !important',
+                  backgroundColor: "black"
+                },
+                "& .MuiCheckbox-root .MuiSvgIcon-root": {
+                  border: "1px solid #c9c3c3 !important", 
+                  borderRadius: "4px", 
                 },
                 "& .highlight-column": {
-                  color: "#0fdfb7 !important", 
+                  color: "#0fdfb7 !important",
                   fontWeight: "bold",
                 },
                 "& .highlight-column-width": {
-                  color: "black !important", 
+                  color: "black !important",
                   fontWeight: "bold",
                   backgroundColor: '#0fdfb7'
+                },
+                "& .MuiDataGrid-row:hover": {
+                  backgroundColor: "inherit !important", // Prevent hover effect
                 },
               }}
             />
