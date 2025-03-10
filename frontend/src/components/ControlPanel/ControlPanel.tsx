@@ -4,17 +4,17 @@ import style from './ControlPanel.module.css';
 import { useNavigate } from "react-router-dom";
 import arrowBack from '../../assets/icons/arrow_back.svg';
 import SearchBar from "../SearchBar/SearchBar";
-import  {type TableRow} from "../Table/PriceDetailTable";
+import { type TableRow } from "../Table/PriceDetailTable";
 import AddIcon from '../../assets/icons/add_circle.svg';
 import ForecastIcon from '../../assets/icons/forecast.svg';
 import ForecastDemand from "../ForecastDemand/ForecastDemand";
-import { Product } from "../../pages/useGetTableData";
+import { Product } from "../../hooks/useGetTableData";
 
 interface ControlPanelProps {
   selectedRows: Product[];
 }
 const ControlPanel: React.FC<ControlPanelProps> = (props) => {
-  const {selectedRows} = props;
+  const { selectedRows } = props;
   const navigate = useNavigate();
   const navigateToHomePage = () => {
     navigate("/home");
@@ -23,8 +23,8 @@ const ControlPanel: React.FC<ControlPanelProps> = (props) => {
   const [error, setError] = useState<string | null>(null);
   const [openForcastDemand, setOpenForcastDemand] = useState(false);
 
-  const handleOpenForcastDemand=()=>{
-    if(selectedRows.length===0){
+  const handleOpenForcastDemand = () => {
+    if (selectedRows.length === 0) {
       setError('Please select atleast one product');
       return;
     }
@@ -51,17 +51,16 @@ const ControlPanel: React.FC<ControlPanelProps> = (props) => {
           DemandForecast
         </div>
       </div>
-      <div className={style['vertical-line']}/>
+      <div className={style['vertical-line']} />
       <div className={style['search-bar-container']}>
         {/* <SearchBar data={data}/> */}
       </div>
-      <div className={style['vertical-line']}/>
-      
+      <div className={style['vertical-line']} />
       <div className={style['add-product']}>
-        
+
         <button className={style['add-product-button']} onClick={() => setOpen(true)}>
-        <img src={AddIcon}  alt="forecast-icon" />
-        <p>Add Product</p>
+          <img src={AddIcon} alt="forecast-icon" />
+          <p>Add Product</p>
         </button>
       </div>
       <div className={style['forecast-demand']}>
@@ -77,10 +76,10 @@ const ControlPanel: React.FC<ControlPanelProps> = (props) => {
       </div>
       <AddProductPopup open={open} onClose={() => setOpen(false)} />
       {
-        selectedRows && selectedRows.length>0&&
-      <ForecastDemand open={openForcastDemand} onClose={() => setOpenForcastDemand(false)} selectedData={selectedRows} /> 
+        selectedRows && selectedRows.length > 0 &&
+        <ForecastDemand open={openForcastDemand} onClose={() => setOpenForcastDemand(false)} selectedData={selectedRows} />
       }
-       {error && <div>{error}</div>}
+      {error && <div>{error}</div>}
     </div>
 
 
