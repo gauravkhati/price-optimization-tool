@@ -1,20 +1,20 @@
-import Navbar from "../components/Navbar/Navbar";
-import ControlPanel from "../components/ControlPanel/ControlPanel";
+import Navbar from "../../components/Navbar/Navbar";
+import ControlPanel from "../../components/ControlPanel/ControlPanel";
 import { useEffect, useState } from "react";
-import useGetTableData, { Product } from "./useGetTableData";
+import useGetTableData, { Product } from "../../hooks/useGetTableData";
 import { DataGrid, GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
 import { CircularProgress, Paper } from "@mui/material";
-import { sampleData } from "../components/constant";
+import { sampleData } from "../../components/constant";
 
 
 
 
 const ProductManagement = () => {
-  const { fetchData, error, loading , tableData } = useGetTableData();
+  const { fetchData, error, loading, tableData } = useGetTableData();
   const [selectedRows, setSelectedRows] = useState<Product[]>([]);
 
 
-  useEffect(() => { 
+  useEffect(() => {
     console.log("Fetching Data");
     fetchData({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,21 +33,21 @@ const ProductManagement = () => {
     { field: "demand_forecast", headerName: "Forecast", type: "number", flex: 1 },
     { field: "optimized_price", headerName: "Optimized Price", type: "number", flex: 1 }
   ];
-  const columnData=columns.filter((column:GridColDef)=>tableData?.products[0][column.field as keyof Product]);
+  const columnData = columns.filter((column: GridColDef) => tableData?.products[0][column.field as keyof Product]);
 
   const handlePaginationChange = (model: { page: number; pageSize: number }) => {
     fetchData({ skip: model.page * model.pageSize, limit: model.pageSize });
   };
 
   const handleRowSelection = (rowSelectionModel: GridRowSelectionModel) => {
-    const selectedData = (tableData?.products||[]).filter((row) => rowSelectionModel.includes(row.id));
+    const selectedData = (tableData?.products || []).filter((row) => rowSelectionModel.includes(row.id));
     setSelectedRows(selectedData);
   };
 
   return (
     <div>
       <Navbar />
-      <ControlPanel selectedRows={selectedRows}/>
+      <ControlPanel selectedRows={selectedRows} />
       <div style={{ height: 700, width: "100%" }}>
         <DataGrid
           rows={tableData?.products}

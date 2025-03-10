@@ -1,21 +1,25 @@
-import styles from "./HeroSection.module.css";
-import FeatureCard from "../FeatureCard/FeatureCard";
+import styles from "./HomeSection.module.css";
 import logoutIcon from "../../assets/icons/logout.svg";
 import { useNavigate } from "react-router-dom";
-const HeroSection = () => {
+import FeatureCard from "../../components/FeatureCard/FeatureCard";
+import PriceOpt from '../../assets/icons/priceOpt.png';
+import CreateProduct from '../../assets/icons/CreateProduct.png';
+
+
+const HomeSection = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken"); // Remove token from localStorage
-    navigate("/"); // Redirect to home page
+    localStorage.removeItem("accessToken");
+    navigate("/");
   };
   return (
-    <div className={styles.hero}>
+    <div className={styles.container}>
       <h1 className={styles.title}>Price Optimization Tool</h1>
       <p className={styles.subtitle}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
       </p>
-      <div className={styles['logout-container']}onClick={handleLogout}>
+      <div className={styles['logout-container']} onClick={handleLogout}>
         <h5>Logout</h5>
         <img src={logoutIcon} alt="logoutIcon"></img>
       </div>
@@ -25,15 +29,17 @@ const HeroSection = () => {
           title="Create and Manage Product"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           link="/products"
+          image={CreateProduct}
         />
         <FeatureCard
           title="Pricing Optimization"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           link="/pricing"
+          image={PriceOpt}
         />
       </div>
     </div>
   );
 };
 
-export default HeroSection;
+export default HomeSection;

@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(to bottom, black, #2d2d2d);
+  color: white;
+  height: 100vh;
+  padding: 8rem 2rem;
+}
+
+.title {
+  font-size: 6rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-top: 1.6rem;
+  color: #bbb;
+  max-width: 80rem;
+  font-size: 2rem;
+}
+
+.features {
+  display: flex;
+  gap: 10rem;
+  margin-top: 8rem;
+}
+.logout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  position: fixed;
+  top: 1rem;
+  right: 2rem;
+  transition: transform 0.3s ease-in-out;
+}
+.logout-container:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 4rem 2rem;
+    height: fit-content;
+  }
+
+  .title {
+    font-size: 4rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
+  .features {
+    flex-direction: column;
+    gap: 4rem;
+  }
+}
